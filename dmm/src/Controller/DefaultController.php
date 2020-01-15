@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use App\Entity\Category;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,12 +23,20 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/{category}", name="default_categorie")
+     * @Route("/{category_id}", name="default_category")
      */
-    public function category(ArticleRepository $repository, CategoryRepository $categoryRepository, Request $request )
+    public function category(ArticleRepository $repository, $category_id, CategoryRepository $categoryRepository)
     {
-        $articles = $repository->findAll();
+        $article = $repository->findByCategory($category_id);
+        dump($category = $categoryRepository->find($category_id));
+        return $this->render('frontend/category.html.twig', ['article' => $article, 'category' => $category] );
+    }
 
-        return $this->render('frontend/category.html.twig', 'article' => $article);
+    /**
+     * @Route("/{category_id}/{id}", name="default_article")
+     */
+    public function article(Article $article)
+    {
+        return $this->render('frontend/article.html.twig', ['article' => $article]);
     }
 }
