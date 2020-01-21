@@ -47,9 +47,8 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findByCategory($category_id)
+    public function findByCategory($category)
     {
-        $category = $category_id;
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT e FROM App\Entity\article e  WHERE e.category  =  :category")
             ->setParameter('category', $category);

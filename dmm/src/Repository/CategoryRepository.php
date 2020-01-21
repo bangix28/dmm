@@ -47,5 +47,11 @@ class CategoryRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findCategory($category_title) {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery("SELECT e FROM App\Entity\category e  WHERE e.title  =  :category_title")
+            ->setParameter('category_title', $category_title);
+        return $query->getResult();
+    }
 
 }

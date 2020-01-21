@@ -23,13 +23,14 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/{category_id}", name="default_category")
+     * @Route("/{category_title}", name="default_category")
      */
-    public function category(ArticleRepository $repository, $category_id, CategoryRepository $categoryRepository)
+    public function category(ArticleRepository $repository, $category_title, CategoryRepository $categoryRepository)
     {
-        $article = $repository->findByCategory($category_id);
-        dump($category = $categoryRepository->find($category_id));
-        return $this->render('frontend/category.html.twig', ['article' => $article, 'category' => $category] );
+        $category = $categoryRepository->findCategory($category_title);
+        $article = $repository->findByCategory($category);
+
+        return $this->render('frontend/category.html.twig', ['article' => $article, 'category' => $category_title] );
     }
 
     /**
