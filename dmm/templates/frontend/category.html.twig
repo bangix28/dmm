@@ -6,9 +6,14 @@
         <div class="text-center">
             <h1 class="lead"> {{ category }}  </h1>
         </div>
-        {% for articles in article %}
-            <h3>  {{ articles.author }} </h3>
-            <p> {{ articles.title }}</p>
+        {% for article in articles %}
+            <article class="p-5">
+                <h2>{{ article.title }}</h2>
+                <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/y') }} {{ article.createdAt | date('h:i') }} dans la catégorie {{ article.category.title }}</div>
+                <div class="content"><img src="{{ article.image }}" alt="">
+                    {{ article.content | raw }}
+                    <a href="{{ path('default_article',{'category_title': category, 'id': article.id }) }}" class="btn btn-primary">lire la suite</a></div>
+            </article>
         {% endfor %}
 
     </div>
