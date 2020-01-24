@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Connexion au site</h1>
+        <form action="{{ path('security_login') }}" method="post" >
+            <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}"/>
+            <div class="form-group">
+                <label for="_username"> Email :
+                    <input type="text" placeholder="Email" required name="_username" class="form-control">
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="_password"> Mot de passe :
+                    <input type="password" placeholder="Mot de passe" required name="_password" class="form-control">
+                </label>
+            </div>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+            <button type="submit" class="btn btn-primary">Connexion</button>
+        </form>
+    </div>
+{% endblock %}
