@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(
- *     fields={"pseudo"},
+ *     fields={"username"},
  *     message="Ce pseudo est déja utiliser"
  * )
  */
@@ -28,7 +28,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      *  @Assert\Length(min="8", minMessage="Votre pseudo doit faire 8 caractéres")
      */
-    private $pseudo;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -43,20 +43,24 @@ class User implements UserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
+    /**
+     * @ORM\Column(type="string", length=500)
+     */
+    private $email;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPseudo(): ?string
+    public function getUsername(): ?string
     {
-        return $this->pseudo;
+        return $this->username;
     }
 
-    public function setPseudo(string $pseudo): self
+    public function setUsername(string $username): self
     {
-        $this->pseudo = $pseudo;
+        $this->username = $username;
 
         return $this;
     }
@@ -84,6 +88,19 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
@@ -91,15 +108,5 @@ class User implements UserInterface
     public function getSalt()
     {
         // TODO: Implement getSalt() method.
-    }
-
-    /**
-     * Returns the username used to authenticate the user.
-     *
-     * @return string The username
-     */
-    public function getUsername()
-    {
-        // TODO: Implement getUsername() method.
     }
 }

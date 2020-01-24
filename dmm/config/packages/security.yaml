@@ -1,13 +1,31 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        App\entity\User:
+            algorithm: bcrypt
     providers:
         in_memory: { memory: null }
+        in_database:
+            entity:
+                class: App\entity\User
+                property: pseudo
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: lazy
+
+            provider: in_database
+
+            form_login:
+                login_path: security_login
+                check_path: security_login
+                csrf_token_generator: security.csrf.token_manager
+                use_referer: true
+
+            logout:
+                path: security_logout
+                target: blog
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
