@@ -37,7 +37,7 @@ class User implements UserInterface
     /**
      *@Assert\EqualTo(propertyPath="password", message="Les deux mot de passe doivent être identiques")
      */
-    private $confirm_password;
+    public $confirm_password;
 
     /**
      * @ORM\Column(type="json")
@@ -79,7 +79,7 @@ class User implements UserInterface
 
     public function getRoles(): ?array
     {
-        return $this->roles;
+        return array_unique($this->roles) ;
     }
 
     public function setRoles(array $roles): self
@@ -100,6 +100,8 @@ class User implements UserInterface
 
         return $this;
     }
+
+
 
     public function eraseCredentials()
     {
