@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %} Article !  {% endblock %}
+
+{% block body %}
+    <h1 class="text-center">
+        {% if editMode %}
+        Editer l'article
+        {% else %}
+        Crée un nouvelle article !
+        {% endif %}
+    </h1>
+    <section class="container">
+        {{ form_start(form) }}
+
+        {{ form_row(form.title, {'attr': {'placeholder': "Titre de l'article!"}}) }}
+        {{ form_row(form.category) }}
+        {{ form_row(form.content, {'attr': {'placeholder': "Contenue de l'article"}})  }}
+        {{ form_row(form.image) }}
+        <button type="submit" class="btn btn-primary">
+            {% if editMode %}
+                Enregistrer
+            {% else %}
+                Ajouter l'article
+            {% endif %}
+        </button>
+        {{ form_end(form) }}
+    </section>
+{% endblock %}
