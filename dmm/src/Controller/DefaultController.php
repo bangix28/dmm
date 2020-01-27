@@ -28,7 +28,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/category/{category_title}", name="default_category")
      */
-    public function category(ArticleRepository $repository, $category_title, CategoryRepository $categoryRepository)
+    public function category( ArticleRepository $repository, $category_title, CategoryRepository $categoryRepository)
     {
         $category = $categoryRepository->findCategory($category_title);
         $article = $repository->findByCategory($category);
@@ -49,13 +49,13 @@ class DefaultController extends AbstractController
      * @Route("/article/new", name="default_create_article")
      * @Route("/article/{id}/edit")
      */
-    public function createArticle( ArticleServices $articleServices,Request $request,UserInterface $user, Article $article = null)
+    public function createArticle( ArticleServices $articleServices, Request $request, UserInterface $user, Article $article = null)
     {
         if (!$article) {
             $article = new Article();
         }
         $article = new Article();
-        $form = $articleServices->formCreate($article,$request, $user);
+        $form = $articleServices->formCreate($article, $request, $user);
         if ($form === true) {
             $category = $article->getCategory();
             return $this->redirectToRoute('default_article', ['id' => $article->getId(), 'category_title' => $category->getTitle() ]);
