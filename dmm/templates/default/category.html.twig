@@ -4,7 +4,7 @@
 {% block body %}
     <div class="container">
         <div class="text-center">
-            <h1 class="lead"> {{ category }}  </h1>
+            <h1 class="lead mt-5"> {{ category }}  </h1>
         </div>
         {% for article in articles %}
             <article class="p-5">
@@ -12,7 +12,8 @@
                 <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/y') }} {{ article.createdAt | date('h:i') }} dans la catégorie {{ article.category.title }}</div>
                 <div class="content"><img src="{{ article.image }}" alt="">
                     {{ article.content | raw }}
-                    <a href="{{ path('default_article',{'category_title': category, 'id': article.id }) }}" class="btn btn-primary">lire la suite</a></div>
+                </div>
+                    <a href="{{ path('default_article',{'category_title': category, 'id': article.id }) }}" class="btn btn-primary">lire la suite</a>
             </article>
         {% endfor %}
 
