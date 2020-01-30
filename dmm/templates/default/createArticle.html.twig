@@ -16,7 +16,7 @@
 
         {{ form_row(form.title, {'attr': {'placeholder': "Titre de l'article!"}}) }}
         {{ form_row(form.category) }}
-        {{ form_row(form.content, {'attr': {'placeholder': "Contenue de l'article"}})  }}
+        {{ form_row(form.content, {'attr': {'class': 'content'}})  }}
         {{ form_row(form.image) }}
         <button type="submit" class="btn btn-primary">
             {% if editMode %}
@@ -27,4 +27,14 @@
         </button>
         {{ form_end(form) }}
     </section>
+    {% endblock %}
+
+    {% block javascripts %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+    <script src="trumbowyg/dist/trumbowyg.min.js"></script>
+        <script>
+            // Doing this in a loaded JS file is better, I put this here for simplicity
+            $('#article_content').trumbowyg();
+        </script>
 {% endblock %}
