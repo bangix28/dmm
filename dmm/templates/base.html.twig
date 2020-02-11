@@ -5,16 +5,20 @@
         <link rel="script" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.20.0/langs/fr.min.js">
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+
+        {% endblock %}
+
     </head>
     <body>
     <header>
-        <div class="bg-dark text-center ">
+        <div class="bg-dark text-center mb-5" style="">
         <h1>
                     Dans Ma Maison !
         </h1>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="{{ path('default') }}">Acceuil</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -22,7 +26,7 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ path('default_category',{"category_title": "ken"}) }}">Ken <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Features</a>
@@ -43,6 +47,8 @@
         </div>
     </header>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+         <script src="{{ encore_entry_link_tags('app') }}"> </script>
+        {% endblock %}
     </body>
 </html>
