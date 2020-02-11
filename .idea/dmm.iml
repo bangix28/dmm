@@ -108,6 +108,8 @@
       <excludeFolder url="file://$MODULE_DIR$/dmm/vendor/symfony/var-exporter" />
       <excludeFolder url="file://$MODULE_DIR$/dmm/vendor/symfony/web-link" />
       <excludeFolder url="file://$MODULE_DIR$/dmm/vendor/symfony/web-profiler-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/dmm/vendor/symfony/webpack-encore-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/dmm/vendor/symfony/webpack-encore-pack" />
       <excludeFolder url="file://$MODULE_DIR$/dmm/vendor/symfony/yaml" />
       <excludeFolder url="file://$MODULE_DIR$/dmm/vendor/twig/extra-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/dmm/vendor/twig/twig" />

@@ -1,7 +1,7 @@
 {
     "type": "project",
     "license": "proprietary",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "require": {
         "php": "^7.2.5",
         "ext-ctype": "*",
@@ -29,7 +29,8 @@
         "symfony/twig-pack": "*",
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
-        "symfony/yaml": "5.0.*"
+        "symfony/webpack-encore-bundle": "^1.7",
+        "symfony/webpack-encore-pack": "^1.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",

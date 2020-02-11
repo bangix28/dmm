@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.20.0/ui/trumbowyg.min.css" />
+{% endblock %}
 
 {% block title %} Article !  {% endblock %}
 
@@ -16,7 +19,7 @@
 
         {{ form_row(form.title, {'attr': {'placeholder': "Titre de l'article!"}}) }}
         {{ form_row(form.category) }}
-        {{ form_row(form.content, {'attr': {'placeholder': "Contenue de l'article"}})  }}
+        {{ form_row(form.content, {'attr': {'class': 'content'}})  }}
         {{ form_row(form.image) }}
         <button type="submit" class="btn btn-primary">
             {% if editMode %}
@@ -27,4 +30,43 @@
         </button>
         {{ form_end(form) }}
     </section>
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        {{ encore_entry_script_tags('app') }}
+        <script>
+            // Doing this in a loaded JS file is better, I put this here for simplicity
+            $('#article_content').trumbowyg({
+                btns: [
+                    ['viewHTML'],
+                    ['undo', 'redo'], // Only supported in Blink browsers
+                    ['formatting'],
+                    ['strong', 'em', 'del'],
+                    ['superscript', 'subscript'],
+                    ['link'],
+                    ['insertImage'],
+                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                    ['unorderedList', 'orderedList'],
+                    ['horizontalRule'],
+                    ['removeformat'],
+                    ['fullscreen'],
+                    ['foreColor', 'backColor'],
+                    ['fontsize'],
+                    ['upload'],
+                    ['viewHTML','preformatted']
+
+                ],
+                plugins: {
+                    // Add imagur parameters to upload plugin for demo purposes
+                    upload: {
+                        serverPath: '.../images/article',
+                        fileFieldName: 'image',
+                        headers: {
+                        },
+                        urlPropertyName: 'data.link'
+                    }
+                }
+            });
+        </script>
 {% endblock %}
