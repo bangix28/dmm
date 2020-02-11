@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.20.0/ui/trumbowyg.min.css" />
+{% endblock %}
 
 {% block title %} Article !  {% endblock %}
 
@@ -30,11 +33,40 @@
     {% endblock %}
 
     {% block javascripts %}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
-    <script src="trumbowyg/dist/trumbowyg.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        {{ encore_entry_script_tags('app') }}
         <script>
             // Doing this in a loaded JS file is better, I put this here for simplicity
-            $('#article_content').trumbowyg();
+            $('#article_content').trumbowyg({
+                btns: [
+                    ['viewHTML'],
+                    ['undo', 'redo'], // Only supported in Blink browsers
+                    ['formatting'],
+                    ['strong', 'em', 'del'],
+                    ['superscript', 'subscript'],
+                    ['link'],
+                    ['insertImage'],
+                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                    ['unorderedList', 'orderedList'],
+                    ['horizontalRule'],
+                    ['removeformat'],
+                    ['fullscreen'],
+                    ['foreColor', 'backColor'],
+                    ['fontsize'],
+                    ['upload'],
+                    ['viewHTML','preformatted']
+
+                ],
+                plugins: {
+                    // Add imagur parameters to upload plugin for demo purposes
+                    upload: {
+                        serverPath: '.../images/article',
+                        fileFieldName: 'image',
+                        headers: {
+                        },
+                        urlPropertyName: 'data.link'
+                    }
+                }
+            });
         </script>
 {% endblock %}
