@@ -119,5 +119,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="fr" level="application" />
+    <orderEntry type="library" name="trumbowyg.fontsize" level="application" />
   </component>
 </module>

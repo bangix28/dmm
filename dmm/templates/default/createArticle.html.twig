@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.20.0/ui/trumbowyg.min.css" />
+    {{ encore_entry_link_tags('app') }}
 {% endblock %}
 
 {% block title %} Article !  {% endblock %}
@@ -19,7 +19,7 @@
 
         {{ form_row(form.title, {'attr': {'placeholder': "Titre de l'article!"}}) }}
         {{ form_row(form.category) }}
-        {{ form_row(form.content, {'attr': {'class': 'content'}})  }}
+        {{ form_row(form.content) }}
         {{ form_row(form.image) }}
         <button type="submit" class="btn btn-primary">
             {% if editMode %}
@@ -35,11 +35,12 @@
     {% block javascripts %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         {{ encore_entry_script_tags('app') }}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.20.0/langs/fr.min.js"></script>
         <script>
             // Doing this in a loaded JS file is better, I put this here for simplicity
             $('#article_content').trumbowyg({
+                lang: 'fr',
                 btns: [
-                    ['viewHTML'],
                     ['undo', 'redo'], // Only supported in Blink browsers
                     ['formatting'],
                     ['strong', 'em', 'del'],
@@ -54,7 +55,6 @@
                     ['foreColor', 'backColor'],
                     ['fontsize'],
                     ['upload'],
-                    ['viewHTML','preformatted']
 
                 ],
                 plugins: {

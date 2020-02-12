@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Services\Security\LoginServices;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Cookie;
+
 
 class SecurityController extends AbstractController
 {
@@ -22,7 +25,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="security_login")
      */
-    public function login()
+    public function login( )
     {
         return $this->render('security/login.html.twig');
     }
