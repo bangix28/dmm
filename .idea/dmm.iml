@@ -121,5 +121,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="fr" level="application" />
     <orderEntry type="library" name="trumbowyg.fontsize" level="application" />
+    <orderEntry type="library" name="trumbowyg" level="application" />
+    <orderEntry type="library" name="trumbowyg.fontfamily" level="application" />
+    <orderEntry type="library" name="trumbowyg.specialchars" level="application" />
+    <orderEntry type="library" name="trumbowyg.upload" level="application" />
   </component>
 </module>
