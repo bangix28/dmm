@@ -11,7 +11,7 @@
                 <h2>{{ article.title }}</h2>
                 <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/y') }} {{ article.createdAt | date('h:i') }} dans la catégorie {{ article.category.title }}</div>
                 <div class="content"><img src="{{ article.image }}" alt="">
-                    {{ article.content | raw }}
+                    {{ article.content |slice(0,600)|raw}}
                 </div>
                     <a href="{{ path('default_article',{'category_title': category, 'id': article.id }) }}" class="btn btn-primary">lire la suite</a>
             </article>
