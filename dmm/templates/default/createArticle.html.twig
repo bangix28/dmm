@@ -34,8 +34,11 @@
 
     {% block javascripts %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        {{ encore_entry_script_tags('app') }}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.20.0/langs/fr.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.19.1/trumbowyg.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.19.1/langs/fr.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.19.1/plugins/fontfamily/trumbowyg.fontfamily.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.19.1/plugins/specialchars/trumbowyg.specialchars.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.19.1/plugins/upload/trumbowyg.upload.min.js"></script>
         <script>
             // Doing this in a loaded JS file is better, I put this here for simplicity
             $('#article_content').trumbowyg({
