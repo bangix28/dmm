@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% for book in result %}
+    <p>{{ book.volumeInfo.title }}</p>
+    <p>{{ book.volumeInfo.authors | join }}</p>
+{% endfor %}
+
+{% endblock %}

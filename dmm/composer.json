@@ -1,7 +1,7 @@
 {
     "type": "project",
     "license": "proprietary",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "require": {
         "php": "^7.2.5",
         "ext-ctype": "*",

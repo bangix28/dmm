@@ -114,6 +114,16 @@
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/browser-kit" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/webpack-encore-bundle" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/webpack-encore-pack" />
+      <path value="$PROJECT_DIR$/dmm/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/dmm/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/dmm/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/dmm/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/dmm/vendor/google/apiclient-services" />
+      <path value="$PROJECT_DIR$/dmm/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/dmm/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/dmm/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/dmm/vendor/google/apiclient" />
+      <path value="$PROJECT_DIR$/dmm/vendor/google/auth" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Article;
-use App\Entity\Category;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use App\Services\Article\ArticleServices;
+use App\Services\book_api\bookServices;
+use Google_Client;
+use Google_Service_Books;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -63,5 +65,16 @@ class DefaultController extends AbstractController
             return $this->render('default/createArticle.html.twig',
                 ['form' => $form->createView(),
                     'editMode' => $article->getId() !== null]);
+    }
+
+    /**
+     * @Route("/search")
+     */
+    public function search(bookServices $bookServices){
+
+        $result = $bookServices->search();
+
+        return $this->render('default/search.html.twig', ['result' => $result]);
+
     }
 }
