@@ -1,4 +1,5 @@
 ../.idea
+src/Services/Api/Apikey.php
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
