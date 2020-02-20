@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <form class="form-inline my-2 my-lg-0" method="post" action="{{ path('default_search') }}">
+    <form class="form-inline my-2 my-lg-0" method="post" action="{{ path('book') }}">
         <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </form>
@@ -11,7 +11,10 @@
         <div class="card-header">{{ book.volumeInfo.title }}</div>
         <div class="card-body">
           <h4 class="card-title"> {{ book.volumeInfo.authors | join }} </h4>
-            <p class="card-text">{{ book.volumeInfo.description }}</p>
+            {% if book.volumeInfo.imageLinks.thumbnail is defined %}
+            <img src="{{ book.volumeInfo.imageLinks.thumbnail }}" alt="image du livre {{ book.volumeInfo.title }}">
+            {% endif %}
+            <p class="card-text">{{ book.volumeInfo.description | striptags}}</p>
         </div>
     </div>
 
