@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\book_api;
+namespace App\Services\Book_api;
 
 
 use Google_Client;
@@ -9,7 +9,7 @@ use Google_Service_Books;
 use Symfony\Component\HttpFoundation\Request;
 use Apikey;
 
-class bookServices
+class BookServices
 {
 
     public function search(Request $request){
@@ -18,7 +18,14 @@ class bookServices
     $apikey = new Apikey();
     $client->setDeveloperKey($apikey->apibook());
     $service = new Google_Service_Books($client);
-    $results = $service->volumes->listVolumes($request->get('search'));
+    $optParams = array(
+        'orderBy' => "relevance",
+        'printType' => "books",
+
+        'langRestrict' => "fr",
+        'q' => 'intitle:'. $request->get('search') . ''
+    );
+    $results = $service->volumes->listVolumes('q', $optParams);
 
     return $results;
 }
