@@ -7,7 +7,7 @@ use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use App\Services\Article\ArticleServices;
-use App\Services\book_api\bookServices;
+use App\Services\Book_api\BookServices;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -65,17 +65,4 @@ class DefaultController extends AbstractController
                     'editMode' => $article->getId() !== null]);
     }
 
-    /**
-     * @Route("/search", name="default_search")
-     */
-    public function search(bookServices $bookServices, Request $request)
-    {
-        if (!empty($request->get('search'))) {
-
-            dump($result = $bookServices->search($request));
-        } else {
-            $result = false;
-    }
-        return $this->render('default/search.html.twig', ['result' => $result]);
-    }
 }
