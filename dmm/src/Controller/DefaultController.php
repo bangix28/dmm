@@ -7,7 +7,6 @@ use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use App\Services\Article\ArticleServices;
-use App\Services\Book_api\BookServices;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +14,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class DefaultController extends AbstractController
 {
+
+    public $articleRepo;
+
+    public function __construct(ArticleRepository $articleRepo)
+    {
+        $this->articleRepo = $articleRepo;
+    }
+
     /**
      * @Route("/", name="default")
      */
@@ -28,7 +35,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/category/{category_title}", name="default_category")
      */
-    public function category( ArticleRepository $repository, $category_title, CategoryRepository $categoryRepository)
+    public function category(ArticleRepository $repository, $category_title, CategoryRepository $categoryRepository)
     {
         $category = $categoryRepository->findCategory($category_title);
         $article = $repository->findByCategory($category);
