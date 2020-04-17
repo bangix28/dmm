@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+
+        <div class="container">
+            <div class="text-center">
+                <h1>Profile</h1>
+
+            <img src="{{ asset('build/images/user.png') }}">
+            </div>
+            <a href="{{ path('user_edit',{'f': '1'}) }}">
+                <div class="col-12 row">
+                    <p class="col-6">Email </p>
+                    <p class="col-6">{{ user.email }}</p>
+                </div>
+            </a>
+                <a href="{{ path('user_edit',{'f': '2'}) }}">
+                    <div class="col-12 row">
+                        <p class="lead col-6">Mot De Passe<p>
+                        <p class="col-4">.......</p>
+                    </div>
+                </a>
+            <hr>
+            <div class="border">
+                <a href="{{ path('user_edit',{'f': '7'}) }}">
+                    <div class="col-12 row">
+                        <p class="col-6">Nom</p>
+                        <p class="col-4">{{ user.lastName }}</p>
+                    </div>
+                </a>
+
+                <a href="{{ path('user_edit',{'f': '6'}) }}">
+                    <div class="col-12 row">
+                        <p class="col-6">Prénom</p>
+                        <p class="col-4">{{ user.firstName }}</p>
+                    </div>
+                </a>
+
+                <a href="{{ path('user_edit',{'f': '3'}) }}">
+                    <div class="col-12 row">
+                        <p class="col-6">Date de naissance</p>
+                        <p class="col-4">{{ user.birthday|date('d/m/Y') }}</p>
+                    </div>
+                </a>
+
+
+                <a href="{{ path('user_edit',{'f': '4'}) }}">
+                    <div class="col-12 row">
+                        <p class="col-6">Télephone</p>
+                            {% if user.phoneNumber %}
+                        <p class="col-4"> {{ user.phoneNumber|phone_number_format('INTERNATIONAL') }}
+                            {% endif %}
+                        </p>
+                    </div>
+                </a>
+                <a href="{{ path('user_edit',{'f': '5'}) }}">
+                    <div class="col-12 row">
+                        <p class="col-6">Sexe</p>
+                        <p class="col-4">{{ user.gender }}</p>
+                    </div>
+                </a>
+            </div>
+    </div>
+    <a href="{{ path('default') }}">Acceuil</a>
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}

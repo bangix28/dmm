@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+{% if form == 'username' %}
+    {{ form_row(form.username) }}
+{% elseif form == 'password' %}
+    {{ form_row(form.password) }}
+{% elseif form == 'email' %}
+    {{ form_row(form.email) }}
+{% elseif form == 'birthday' %}
+    {{ form_row(form.birthday) }}
+{% elseif form == 'phone' %}
+    {{ form_row(forme.phone) }}
+{% elseif form == 'gender' %}
+    {{ form_row(forme.gender) }}
+{% endif %}
+
+{{ form_end(form) }}
+<button class="btn">{{ button_label|default('Save') }}</button>

@@ -47,4 +47,13 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getId($username)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery('SELECT u FROM App\Entity\User u WHERE u.email = :email')
+            ->setParameter('email', $username);
+        return $query->getSingleResult();
+
+    }
 }

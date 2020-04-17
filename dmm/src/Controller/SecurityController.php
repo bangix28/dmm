@@ -7,27 +7,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Cookie;
-
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/security", name="security")
+     * @Route("/login", name="app_login")
      */
-    public function index()
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        return $this->render('security/index.html.twig', [
-            'controller_name' => 'SecurityController',
-        ]);
-    }
+        if ($this->getUser()) {
+             return $this->redirectToRoute('default_index');
+        }
 
-    /**
-     * @Route("/login", name="security_login")
-     */
-    public function login( )
-    {
-        return $this->render('security/login.html.twig');
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**
@@ -35,16 +33,20 @@ class SecurityController extends AbstractController
      */
     public function registration(LoginServices $loginServices, Request $request )
     {
-        $form = $loginServices->formCreate($request);
+        $edit = false;
+        $form = $loginServices->formCreate($request, $edit);
         if ($form === true)
         {
-            return $this->redirectToRoute('security_login');
+            return $this->redirectToRoute('app_login');
         }
         return $this->render('security/registrationView.html.twig', ['form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/deconnexion", name="security_logout")
-     */
-    public function logout() {}
+/**
+ * @Route("/logout", name="app_logout")
+ */
+public function logout()
+{
+    throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+}
 }

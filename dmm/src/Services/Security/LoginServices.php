@@ -5,14 +5,13 @@ namespace App\Services\Security;
 
 
 use App\Form\RegistrationFormType;
-use App\Repository\UserRepository;
+use App\Form\RegistrationType;
+use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 
 class LoginServices extends AbstractController
@@ -27,10 +26,11 @@ class LoginServices extends AbstractController
         $this->encoder = $encoder;
     }
 
-    public function formCreate(Request $request)
+    public function formCreate(Request $request, $edit)
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+
+        $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $this->validationForm($user);
@@ -45,8 +45,11 @@ class LoginServices extends AbstractController
         $pass_hach = $this->encoder->encodePassword($user, $user->getPassword());
         $user->setPassword($pass_hach);
         $user->setRoles(['ROLES_USER']);
+        $user->setImages('user.png');
         $this->manager->persist($user);
         $this->manager->flush();
     }
+
+
 
 }

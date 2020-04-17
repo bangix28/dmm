@@ -2,13 +2,21 @@ security:
     encoders:
         App\entity\User:
             algorithm: bcrypt
+        App\Entity\User:
+            algorithm: auto
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: null }
         in_database:
             entity:
                 class: App\Entity\User
-                property: username
+                property: email
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -17,17 +25,15 @@ security:
             anonymous: true
 
             provider: in_database
-
-            form_login:
-                login_path: security_login
-                check_path: security_login
-                csrf_token_generator: security.csrf.token_manager
-                use_referer: true
-
-
+            guard:
+                authenticators:
+                    - App\Security\LoginAuthenticator
+                entry_point: App\Security\LoginAuthenticator
             logout:
-                path: security_logout
-                target: security_login
+                path: app_logout
+                target: app_login
+
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
