@@ -3,11 +3,13 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
-
 
         <div class="container">
+            <div class="text-center">
+                <h1>Profile</h1>
+
             <img src="{{ asset('build/images/user.png') }}">
+            </div>
             <a href="{{ path('user_edit',{'f': '1'}) }}">
                 <div class="col-12 row">
                     <p class="col-6">Email </p>
