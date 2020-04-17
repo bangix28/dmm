@@ -9,7 +9,6 @@
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/twig-bundle" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/var-exporter" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/form" />
-      <path value="$PROJECT_DIR$/dmm/vendor/symfony/yaml" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/security-guard" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/polyfill-intl-icu" />
       <path value="$PROJECT_DIR$/dmm/vendor/phpdocumentor/reflection-docblock" />
@@ -22,7 +21,6 @@
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/expression-language" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/http-foundation" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/web-profiler-bundle" />
-      <path value="$PROJECT_DIR$/dmm/vendor/easycorp/easy-log-handler" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/security-http" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/twig-pack" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/orm-pack" />
@@ -88,8 +86,6 @@
       <path value="$PROJECT_DIR$/dmm/vendor/psr/container" />
       <path value="$PROJECT_DIR$/dmm/vendor/psr/cache" />
       <path value="$PROJECT_DIR$/dmm/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/dmm/vendor/zendframework/zend-eventmanager" />
-      <path value="$PROJECT_DIR$/dmm/vendor/zendframework/zend-code" />
       <path value="$PROJECT_DIR$/dmm/vendor/twig/extra-bundle" />
       <path value="$PROJECT_DIR$/dmm/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/dmm/vendor/twig/twig" />
@@ -113,17 +109,24 @@
       <path value="$PROJECT_DIR$/dmm/vendor/doctrine/doctrine-fixtures-bundle" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/browser-kit" />
       <path value="$PROJECT_DIR$/dmm/vendor/symfony/webpack-encore-bundle" />
-      <path value="$PROJECT_DIR$/dmm/vendor/symfony/webpack-encore-pack" />
-      <path value="$PROJECT_DIR$/dmm/vendor/psr/http-message" />
-      <path value="$PROJECT_DIR$/dmm/vendor/firebase/php-jwt" />
-      <path value="$PROJECT_DIR$/dmm/vendor/ralouphie/getallheaders" />
-      <path value="$PROJECT_DIR$/dmm/vendor/phpseclib/phpseclib" />
-      <path value="$PROJECT_DIR$/dmm/vendor/google/apiclient-services" />
       <path value="$PROJECT_DIR$/dmm/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/dmm/vendor/guzzlehttp/promises" />
       <path value="$PROJECT_DIR$/dmm/vendor/guzzlehttp/guzzle" />
-      <path value="$PROJECT_DIR$/dmm/vendor/google/apiclient" />
-      <path value="$PROJECT_DIR$/dmm/vendor/google/auth" />
+      <path value="$PROJECT_DIR$/dmm/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/dmm/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/dmm/vendor/mtdowling/jmespath.php" />
+      <path value="$PROJECT_DIR$/dmm/vendor/laminas/laminas-zendframework-bridge" />
+      <path value="$PROJECT_DIR$/dmm/vendor/laminas/laminas-eventmanager" />
+      <path value="$PROJECT_DIR$/dmm/vendor/laminas/laminas-code" />
+      <path value="$PROJECT_DIR$/dmm/vendor/webimpress/safe-writer" />
+      <path value="$PROJECT_DIR$/dmm/vendor/aws/aws-sdk-php" />
+      <path value="$PROJECT_DIR$/dmm/vendor/aws/aws-sdk-php-symfony" />
+      <path value="$PROJECT_DIR$/dmm/vendor/vich/uploader-bundle" />
+      <path value="$PROJECT_DIR$/dmm/vendor/jms/metadata" />
+      <path value="$PROJECT_DIR$/dmm/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/dmm/vendor/giggsey/locale" />
+      <path value="$PROJECT_DIR$/dmm/vendor/giggsey/libphonenumber-for-php" />
+      <path value="$PROJECT_DIR$/dmm/vendor/odolbeau/phone-number-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
