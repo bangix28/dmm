@@ -21,6 +21,11 @@ class Share
      */
     private $userId;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\post", inversedBy="shares")
+     */
+    private $post;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +39,18 @@ class Share
     public function setUserId(int $userId): self
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getPost(): ?post
+    {
+        return $this->post;
+    }
+
+    public function setPost(?post $post): self
+    {
+        $this->post = $post;
 
         return $this;
     }
