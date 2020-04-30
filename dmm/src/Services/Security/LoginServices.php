@@ -26,7 +26,7 @@ class LoginServices extends AbstractController
         $this->encoder = $encoder;
     }
 
-    public function formCreate(Request $request, $edit)
+    public function formCreate(Request $request)
     {
         $user = new User();
 
