@@ -29,12 +29,11 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/inscription", name="security_registration")
+     * @Route("/inscription", name="app_registration")
      */
     public function registration(LoginServices $loginServices, Request $request )
     {
-        $edit = false;
-        $form = $loginServices->formCreate($request, $edit);
+        $form = $loginServices->formCreate($request);
         if ($form === true)
         {
             return $this->redirectToRoute('app_login');
