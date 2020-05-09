@@ -17,7 +17,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-             return $this->redirectToRoute('default_index');
+             return $this->redirectToRoute('default');
         }
 
         // get the login error if there is one
@@ -33,6 +33,10 @@ class SecurityController extends AbstractController
      */
     public function registration(LoginServices $loginServices, Request $request )
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('default');
+        }
+
         $form = $loginServices->formCreate($request);
         if ($form === true)
         {
