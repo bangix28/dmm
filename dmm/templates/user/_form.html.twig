@@ -8,9 +8,9 @@
 {% elseif form == 'birthday' %}
     {{ form_row(form.birthday) }}
 {% elseif form == 'phone' %}
-    {{ form_row(forme.phone) }}
+    {{ form_widget(form.phone) }}
 {% elseif form == 'gender' %}
-    {{ form_row(forme.gender) }}
+    {{ form_row(form.gender) }}
 {% endif %}
 
 {{ form_end(form) }}
