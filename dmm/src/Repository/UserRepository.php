@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -48,12 +49,23 @@ class UserRepository extends ServiceEntityRepository
     }
     */
 
-    public function getId($username)
-    {
-        $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery('SELECT u FROM App\Entity\User u WHERE u.email = :email')
-            ->setParameter('email', $username);
-        return $query->getSingleResult();
+   public function findUser($query)
+   {
+       $qb = $this->createQueryBuilder('u');
+       $qb
+           ->where(
+               $qb->expr()->andX(
+                   $qb->expr()->orX(
+                       $qb->expr()->like('u.lastName', ':query'),
+                       $qb->expr()->like('u.firstName', ':query')
+                   )
+               )
 
-    }
+           )
+           ->setParameter('query', '%' . $query . '%' )
+           ;
+       return $qb
+           ->getQuery()
+           ->getResult();
+   }
 }
