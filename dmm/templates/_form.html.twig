@@ -1,0 +1,8 @@
+    {{ form_start(form,{
+        'attr': {'class': 'form-inline my-2 my-lg-0', 'action': path('handleSearch')}
+    })  }}
+    {{ form_row(form.search,{
+        'attr': {'class': 'form-control mr-sm-2'}
+    }) }}
+    {{ form_end(form) }}
+
