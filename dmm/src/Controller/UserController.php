@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\SearchType;
 use App\Repository\UserRepository;
 use App\Services\Security\UserServices;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -19,9 +22,12 @@ class UserController extends AbstractController
 {
     private $session;
 
-    public function __construct(SessionInterface $session)
+    private $repo;
+
+    public function __construct(SessionInterface $session, UserRepository $userRepository)
     {
         $this->session = $session;
+        $this->repo = $userRepository;
     }
 
     /**
@@ -64,5 +70,32 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('user_index');
+    }
+
+    public function search(Request $request)
+    {
+        $form = $this->createFormBuilder(null)
+            ->add('search', SearchType::class)
+            ->getForm();
+        $form->handleRequest($request);
+      return $this->render('_form.html.twig',[
+          'form' => $form->createView()
+      ]);
+    }
+
+    /**
+     * @Route("/search", name="handleSearch")
+     * @return Response
+     */
+    public function handleSearch(Request $request)
+    {
+       $query = $request->request->get('form')['search'];
+        if ($query)
+        {
+            $user = $this->repo->findUser($query);
+        }
+        return $this->render('user/user_search.html.twig', [
+            'user' => $user
+        ]);
     }
 }
