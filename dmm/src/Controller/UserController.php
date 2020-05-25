@@ -93,9 +93,11 @@ class UserController extends AbstractController
         if ($query)
         {
             $user = $this->repo->findUser($query);
+            dump($user);
         }
         return $this->render('user/user_search.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'query' => $query
         ]);
     }
 }
