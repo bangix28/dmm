@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user.firstName }}{{ user.lastName }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <header>
+        <div class="text-center">
+            <img src="{{ asset('build/images/user.png') }}" alt="photo de l'utilisateur" class="rounded-circle img-fluid">
+            <h1>{{ user.firstName }} {{ user.lastName }}</h1>
+        </div>
+    </header>
+    <main>
+        <div id="formPost">
+            Clique la !
+            {{ include('profil/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+            {% for post in post %}
+        <article class="col-10 mx-auto mt-5 border rounded p-3">
+            <div class="row col-6">
+                <img src="{{ asset('build/images/user.png') }}" class="rounded-circle  img-fluid align-items-top" style="max-height: 50px;"  alt="User image">
+                <p class="ml-1">{{ post.user.firstName }} {{ post.user.lastName }} posté le {{ post.createdAt|date('d/m/y')}} à {{ post.createdAt|date('h:II') }} </p>
+
+            </div>
+            <div class="col-10  mx-auto">
+                <p>{{ post.content }}</p>
+            </div>
+            <div class="col-12 row">
+                <div class="col-4">
+                    <a href="#">
+                        <i> {{ post.like1 }} like </i>
+                    </a>
+                </div>
+                <div class="col-4">
+                    <a href="#">
+                        <i> {{ post.comment }} comment </i>
+                    </a>
+                </div>
+                <div class="col-4">
+                    <a href="#">
+                        <i> {{ post.share }} share </i>
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        {% endfor %}
+    </main>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {% set form = '{{ include(\'profil/_form.html.twig\', {\'button_label\': \'Update\'}) }};' %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}

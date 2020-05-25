@@ -12,6 +12,7 @@ import 'trumbowyg/dist/ui/trumbowyg.min.css';
 // import $ from 'jquery';
 
 import 'trumbowyg/dist/trumbowyg.min';
+import  './form'
 
 
 

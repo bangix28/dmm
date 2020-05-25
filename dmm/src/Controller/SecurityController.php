@@ -17,7 +17,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-             return $this->redirectToRoute('default_index');
+             return $this->redirectToRoute('default');
         }
 
         // get the login error if there is one
@@ -29,12 +29,15 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/inscription", name="security_registration")
+     * @Route("/inscription", name="app_registration")
      */
     public function registration(LoginServices $loginServices, Request $request )
     {
-        $edit = false;
-        $form = $loginServices->formCreate($request, $edit);
+        if ($this->getUser()) {
+            return $this->redirectToRoute('default');
+        }
+
+        $form = $loginServices->formCreate($request);
         if ($form === true)
         {
             return $this->redirectToRoute('app_login');
