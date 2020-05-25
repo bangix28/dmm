@@ -10,44 +10,45 @@
         {% endblock %}
 
     </head>
-    <header>
-        <div class="bg-dark text-center mb-5" style="">
-        <h1>
-                    Dans Ma Maison !
-        </h1>
-            {% if app.user %}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href=" {{ path('default') }} "> Acceuil</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                    </li>
-                    <li class="nav-item">
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                    </li>
-
-                </ul>
-            </div>
-            {{ render(controller(
-                'App\\Controller\\UserController::search'
-            )) }}
-            </nav>
-            {% endif  %}
-        </div>
-    </header>
-
     <body>
-        {% block body %}
-        {% endblock %}
-        {% block javascripts %}
-        {% endblock %}
+        <header>
+            <div class="bg-dark text-center mb-5" style="">
+            <h1>
+                        Dans Ma Maison !
+            </h1>
+                {% if app.user %}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href=" {{ path('default') }} "> Acceuil</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                        </li>
+                        <li class="nav-item">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                        </li>
+
+                    </ul>
+                </div>
+                {{ render(controller(
+                    'App\\Controller\\UserController::search'
+                )) }}
+                </nav>
+                {% endif  %}
+            </div>
+        </header>
+            <div class="container">
+                {% block body %}
+                {% endblock %}
+                {% block javascripts %}
+                {% endblock %}
+            </div>
     </body>
 </html>
