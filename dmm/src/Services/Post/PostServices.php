@@ -45,5 +45,6 @@ class PostServices extends AbstractController
         $post->setUser($user);
         $this->manager->persist($post);
         $this->manager->flush();
+        return $this->redirectToRoute('profil');
     }
 }
