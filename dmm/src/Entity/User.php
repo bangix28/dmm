@@ -86,6 +86,7 @@ class User implements UserInterface
      */
     private $follows;
 
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
