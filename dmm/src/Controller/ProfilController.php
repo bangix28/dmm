@@ -42,16 +42,4 @@ class ProfilController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
-     /**
-      * @Route("/profil/post", name="post")
-      */
-    public function postForm(Request $request, UserInterface $user,PostServices $postServices)
-    {
-        $form = $postServices->formCreate($request, $user);
-        return $this->render('profil/_form.html.twig',[
-            'form' => $form->createView()
-        ]);
-    }
-
 }
