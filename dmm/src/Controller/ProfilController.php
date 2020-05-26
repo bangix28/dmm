@@ -38,7 +38,7 @@ class ProfilController extends AbstractController
             $form = $postServices->formCreate($request, $user);
         return $this->render('profil/index.html.twig', [
             'user' => $this->userRepository->find(array('id' => $id)),
-            'post' => $this->postRepository->findBy(array('userId' => $id)),
+            'post' => $this->postRepository->findBy(array('postFor' => $id), array('createdAt' => 'desc')),
             'form' => $form->createView()
         ]);
     }
