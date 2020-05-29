@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200417142616 extends AbstractMigration
+final class Version20200529200557 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,9 @@ final class Version20200417142616 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE user ADD password VARCHAR(255) NOT NULL, ADD roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', ADD email VARCHAR(500) NOT NULL, ADD images VARCHAR(255) NOT NULL, ADD birthday DATETIME DEFAULT NULL, ADD gender VARCHAR(255) DEFAULT NULL, ADD phone_number VARCHAR(35) DEFAULT NULL COMMENT \'(DC2Type:phone_number)\', ADD last_name VARCHAR(255) NOT NULL, ADD first_name VARCHAR(255) NOT NULL, DROP te, DROP tea, DROP tee');
+        $this->addSql('ALTER TABLE post ADD follow_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE post ADD CONSTRAINT FK_5A8A6C8D8711D3BC FOREIGN KEY (follow_id) REFERENCES follow (id)');
+        $this->addSql('CREATE INDEX IDX_5A8A6C8D8711D3BC ON post (follow_id)');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +32,8 @@ final class Version20200417142616 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE user ADD te INT NOT NULL, ADD tea INT NOT NULL, ADD tee INT NOT NULL, DROP password, DROP roles, DROP email, DROP images, DROP birthday, DROP gender, DROP phone_number, DROP last_name, DROP first_name');
+        $this->addSql('ALTER TABLE post DROP FOREIGN KEY FK_5A8A6C8D8711D3BC');
+        $this->addSql('DROP INDEX IDX_5A8A6C8D8711D3BC ON post');
+        $this->addSql('ALTER TABLE post DROP follow_id');
     }
 }

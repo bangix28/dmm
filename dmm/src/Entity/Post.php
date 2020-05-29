@@ -18,10 +18,6 @@ class Post
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $userId;
 
     /**
      * @ORM\Column(type="datetime")
@@ -63,6 +59,21 @@ class Post
      */
     private $comment;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $postFor;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $postBy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\follow", inversedBy="posts")
+     */
+    private $follow;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -72,18 +83,6 @@ class Post
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(int $userId): self
-    {
-        $this->userId = $userId;
-
-        return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
@@ -216,6 +215,42 @@ class Post
     public function setComment(int $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getPostFor(): ?int
+    {
+        return $this->postFor;
+    }
+
+    public function setPostFor(int $postFor): self
+    {
+        $this->postFor = $postFor;
+
+        return $this;
+    }
+
+    public function getPostBy(): ?int
+    {
+        return $this->postBy;
+    }
+
+    public function setPostBy(int $postBy): self
+    {
+        $this->postBy = $postBy;
+
+        return $this;
+    }
+
+    public function getFollow(): ?follow
+    {
+        return $this->follow;
+    }
+
+    public function setFollow(?follow $follow): self
+    {
+        $this->follow = $follow;
 
         return $this;
     }

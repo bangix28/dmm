@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use App\Services\Post\PostServices;
+use App\Services\Profil\ProfilServices;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,25 +33,16 @@ class ProfilController extends AbstractController
      * @param PostServices $postServices
      * @return Response
      */
-    public function index(Request $request, UserInterface $user, PostServices $postServices)
+    public function index(Request $request, UserInterface $user, PostServices $postServices, ProfilServices $profilServices)
     {
             $id = $request->get('id');
             $form = $postServices->formCreate($request, $user);
+            $follow = $profilServices->follow($request, $user);
         return $this->render('profil/index.html.twig', [
             'user' => $this->userRepository->find(array('id' => $id)),
-            'post' => $this->postRepository->findBy(array('userId' => $id)),
-            'form' => $form->createView()
-        ]);
-    }
-
-     /**
-      * @Route("/profil/post", name="post")
-      */
-    public function postForm(Request $request, UserInterface $user,PostServices $postServices)
-    {
-        $form = $postServices->formCreate($request, $user);
-        return $this->render('profil/_form.html.twig',[
-            'form' => $form->createView()
+            'post' => $this->postRepository->findBy(array('postFor' => $id), array('createdAt' => 'desc')),
+            'form' => $form->createView(),
+            'follow' => $follow->createView()
         ]);
     }
 
