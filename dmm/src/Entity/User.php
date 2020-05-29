@@ -82,7 +82,7 @@ class User implements UserInterface
     private $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Follow", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Follow", mappedBy="follower")
      */
     private $follows;
 
@@ -280,7 +280,7 @@ class User implements UserInterface
     {
         if (!$this->follows->contains($follow)) {
             $this->follows[] = $follow;
-            $follow->setUser($this);
+            $follow->setFollower($this);
         }
 
         return $this;
@@ -291,12 +291,13 @@ class User implements UserInterface
         if ($this->follows->contains($follow)) {
             $this->follows->removeElement($follow);
             // set the owning side to null (unless already changed)
-            if ($follow->getUser() === $this) {
-                $follow->setUser(null);
+            if ($follow->getFollower() === $this) {
+                $follow->setFollower(null);
             }
         }
 
         return $this;
     }
+
 
 }

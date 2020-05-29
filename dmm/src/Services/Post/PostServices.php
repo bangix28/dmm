@@ -7,7 +7,6 @@ namespace App\Services\Post;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Form\PostType;
-use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +24,7 @@ class PostServices extends AbstractController
 
     public function formCreate(Request $request, $user)
     {
+        dump($request->get('id'));
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
@@ -45,6 +45,6 @@ class PostServices extends AbstractController
         $post->setUser($user);
         $this->manager->persist($post);
         $this->manager->flush();
-        return $this->redirectToRoute('profil');
+        return $this->redirectToRoute('Profil');
     }
 }
