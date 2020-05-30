@@ -4,18 +4,40 @@
 {% block title %}Hello DefaultController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <main class="container">
+        <div>
+            {% for post in post %}
+                <article class="col-10 mx-auto mt-5 border rounded p-3">
+                    <div class="row col-6">
+                        <img src="{{ asset('build/images/user.png') }}" class="rounded-circle  img-fluid align-items-top" style="max-height: 50px;"  alt="User image">
+                        <p class="ml-1">
+                            {{ post.user.firstName }} {{ post.user.lastName }} posté le {{ post.createdAt|date('d/m/y')}} à {{ post.createdAt|date('h:II') }}
+                        </p>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/dmm/dmm/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/dmm/dmm/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-    </ul>
-</div>
+                    </div>
+                    <div class="col-10  mx-auto">
+                        <p>{{ post.content }}</p>
+                    </div>
+                    <div class="col-12 row">
+                        <div class="col-4">
+                            <a href="#">
+                                <i> {{ post.like1 }} like </i>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="#">
+                                <i> {{ post.comment }} comment </i>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="#">
+                                <i> {{ post.share }} share </i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </main>
 {% endblock %}
