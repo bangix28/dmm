@@ -25,14 +25,8 @@
 
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                        </li>
                         <li class="nav-item">
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('profil', {'id': app.user.id}) }}">{{ app.user.firstName }}  {{ app.user.lastname }}</a>
                         </li>
 
                     </ul>

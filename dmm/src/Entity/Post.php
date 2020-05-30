@@ -69,11 +69,6 @@ class Post
      */
     private $postBy;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\follow", inversedBy="posts")
-     */
-    private $follow;
-
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -239,18 +234,6 @@ class Post
     public function setPostBy(int $postBy): self
     {
         $this->postBy = $postBy;
-
-        return $this;
-    }
-
-    public function getFollow(): ?follow
-    {
-        return $this->follow;
-    }
-
-    public function setFollow(?follow $follow): self
-    {
-        $this->follow = $follow;
 
         return $this;
     }
