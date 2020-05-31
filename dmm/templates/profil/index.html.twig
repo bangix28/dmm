@@ -13,10 +13,9 @@
             {% endif %}
         </div>
     </header>
-    <main>
-        <div id="formPost">
-            Clique la !
-            {{ include('Profil/_form.html.twig', {'button_label': 'Update'}) }}
+    <main class="container">
+        <div class="col-10 mx-auto p-3 mt-5 border rounded">
+            {{ include('Profil/_form.html.twig') }}
         </div>
             {% for post in post %}
         <article class="col-10 mx-auto mt-5 border rounded p-3">
