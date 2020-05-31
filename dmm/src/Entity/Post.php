@@ -64,10 +64,6 @@ class Post
      */
     private $postFor;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $postBy;
 
     public function __construct()
     {
@@ -226,15 +222,4 @@ class Post
         return $this;
     }
 
-    public function getPostBy(): ?int
-    {
-        return $this->postBy;
-    }
-
-    public function setPostBy(int $postBy): self
-    {
-        $this->postBy = $postBy;
-
-        return $this;
-    }
 }
