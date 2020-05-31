@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Repository\FollowRepository;
 use App\Repository\PostRepository;
+use App\Services\Post\PostServices;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,10 +19,13 @@ class DefaultController extends AbstractController
 
     private $followRepository;
 
-    public function __construct(PostRepository $postRepo, FollowRepository $followRepository )
+    private $postServices;
+
+    public function __construct(PostRepository $postRepo, FollowRepository $followRepository, PostServices $postServices )
     {
         $this->postRepo = $postRepo;
         $this->followRepository = $followRepository;
+        $this->postServices = $postServices;
     }
 
     /**
@@ -29,10 +33,12 @@ class DefaultController extends AbstractController
      * @param User $user
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(UserInterface $user)
+    public function index(UserInterface $user, Request $request)
     {
+        $form = $this->postServices->formCreate($request, $user);
         return $this->render('default/index.html.twig', [
-           'post' => $this->postRepo->findBy(array('user' => $this->followRepository->findBy(array('follower' => $user->getId()))))
+            'post' => $this->postRepo->findBy(array('user' => $this->followRepository->findBy(array('follower' => $user->getId()))), array('createdAt' => 'desc')),
+            'form' => $form->createView()
         ]);
     }
 
