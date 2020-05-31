@@ -12,10 +12,6 @@
     </head>
     <body>
         <header>
-            <div class="bg-dark text-center mb-5" style="">
-            <h1>
-                        Dans Ma Maison !
-            </h1>
                 {% if app.user %}
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 <a class="navbar-brand" href=" {{ path('default') }} "> Acceuil</a>
@@ -36,7 +32,6 @@
                 )) }}
                 </nav>
                 {% endif  %}
-            </div>
         </header>
             <div class="container">
                 {% block body %}
