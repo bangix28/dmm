@@ -24,7 +24,6 @@ class PostServices extends AbstractController
 
     public function formCreate(Request $request, $user)
     {
-        dump($request->get('id'));
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
@@ -36,8 +35,13 @@ class PostServices extends AbstractController
 
     public function validationForm(Post $post, User $user, Request $request)
     {
-        $post->setPostBy($user->getId());
-        $post->setPostFor($request->get('id'));
+        if ($request->get('id') === null)
+        {
+            $postFor = $user->getId();
+        }else{
+            $postFor = $request->get('id');
+        }
+        $post->setPostFor($postFor);
         $post->setCreatedAt(new \DateTime('now'));
         $post->setLike1('0');
         $post->setComment('0');
@@ -45,6 +49,5 @@ class PostServices extends AbstractController
         $post->setUser($user);
         $this->manager->persist($post);
         $this->manager->flush();
-        return $this->redirectToRoute('Profil');
     }
 }

@@ -4,9 +4,11 @@
 namespace App\Services\Security;
 
 
+use App\Entity\Follow;
 use App\Form\RegistrationFormType;
 use App\Form\RegistrationType;
 use App\Form\UserType;
+use App\Services\Profil\ProfilServices;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,10 +22,13 @@ class LoginServices extends AbstractController
 
     private $encoder;
 
-    public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
+    private $profilServices;
+
+    public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, ProfilServices $profilServices)
     {
         $this->manager = $manager;
         $this->encoder = $encoder;
+        $this->profilServices = $profilServices;
     }
 
     public function formCreate(Request $request)
@@ -34,6 +39,9 @@ class LoginServices extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $this->validationForm($user);
+            $follow = new Follow();
+            $followId = $user->getId();
+            $this->profilServices->addFollow($follow, $user, $request, $followId);
             $form = true;
             return $form;
         }
