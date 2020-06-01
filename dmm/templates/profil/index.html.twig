@@ -9,7 +9,11 @@
             <img src="{{ asset('build/images/user.png') }}" alt="photo de l'utilisateur" class="rounded-circle img-fluid">
                 <h1>{{ user.firstName }} {{ user.lastName }}</h1>
             {% if app.user.id is not same as(user.id) %}
-                    {{ include('Profil/_form_follow.html.twig', {'button_label': 'ajouter'}) }}
+                    {% if follow is empty %}
+                        <a href="{{ path('profil_add_follow', {'id': user.id}) }}">Ajouter !</a>
+                        {% else %}
+                        <a href="{{ path('profil_del_follow', {'id': follow.id, 'pId': user.id}) }}">Retirer</a>
+                    {% endif %}
             {% endif %}
         </div>
     </header>
