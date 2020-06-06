@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\Profil\ProfilServices;
 use App\Services\Security\LoginServices;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,19 +31,23 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/inscription", name="app_registration")
+     * @param LoginServices $loginServices
+     * @param Request $request
+     * @param ProfilServices $profileServices
      */
-    public function registration(LoginServices $loginServices, Request $request )
+    public function registration(LoginServices $loginServices,Request $request, ProfilServices $profileServices)
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('default');
         }
-
-        $form = $loginServices->formCreate($request);
+        $form = $loginServices->formCreate($request, $profileServices);
         if ($form === true)
         {
             return $this->redirectToRoute('app_login');
         }
-        return $this->render('security/registrationView.html.twig', ['form' => $form->createView()]);
+        return $this->render('security/registrationView.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
 /**
@@ -52,4 +57,5 @@ public function logout()
 {
     throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
 }
+
 }

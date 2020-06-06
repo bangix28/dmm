@@ -20,13 +20,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserController extends AbstractController
 {
-    private $session;
-
     private $repo;
 
-    public function __construct(SessionInterface $session, UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository)
     {
-        $this->session = $session;
         $this->repo = $userRepository;
     }
 
@@ -65,11 +62,13 @@ class UserController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $this->container->get('security.token_storage')->setToken(null);
+
             $entityManager->remove($user);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('user_index');
+        return $this->redirectToRoute('app_logout');
     }
 
     public function search(Request $request)
