@@ -77,12 +77,12 @@ class User implements UserInterface
     private $firstName;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Post",mappedBy="user", orphanRemoval=true)
      */
     private $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Follow", mappedBy="follower")
+     * @ORM\OneToMany(targetEntity="App\Entity\Follow",mappedBy="follower", orphanRemoval=true)
      */
     private $follows;
 
