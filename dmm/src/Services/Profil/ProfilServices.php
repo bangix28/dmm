@@ -10,6 +10,7 @@ use App\Repository\FollowRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProfilServices extends AbstractController
@@ -25,39 +26,13 @@ class ProfilServices extends AbstractController
         $this->followRepository = $followRepository;
     }
 
-    public function follow(Request $request, $user)
-    {
-        $follow = new Follow();
-        $form = $this->createForm(FollowType::class, $follow);
-        $form->handleRequest($request);
-        if ($form->isSubmitted())
-        {
-            $followId = $request->get('id');
-            $this->verification($user, $followId, $request, $follow);
-
-        }
-        return $form;
-    }
-
-    public function addFollow(Follow $follow,User $user, Request $request, $followId)
+    public function addFollow( Follow $follow, $user ,$followId)
     {
         $follow->setFollowedAt(new \DateTime('now'));
        $follow->setFollowedId($followId);
        $follow->setFollower($user);
        $this->manager->persist($follow);
        $this->manager->flush();
-       return $this->redirectToRoute('default');
     }
 
-    public function verification( User $user, $followId, $request, $follow)
-    {
-        $verification = $this->followRepository->findBy(array('follower' => $this->getUser(), 'followedId' => $followId));
-        dump($verification);
-         if (empty($verification))
-         {
-             $this->addFollow($follow, $user, $request, $followId);
-         }else{
-            echo 'rempli !';
-         }
-    }
 }

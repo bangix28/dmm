@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Follow;
-use App\Entity\Post;
 use App\Entity\User;
 use App\Repository\FollowRepository;
 use App\Repository\PostRepository;
@@ -11,6 +10,7 @@ use App\Repository\UserRepository;
 use App\Services\Post\PostServices;
 use App\Services\Profil\ProfilServices;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,16 +26,13 @@ class ProfilController extends AbstractController
 
     private $followRepository;
 
-    private $profilServices;
-
     private $manager;
 
-    public function __construct(PostRepository $postRepository, UserRepository $userRepository, FollowRepository $followRepository, ProfilServices $profilServices, EntityManagerInterface $manager)
+    public function __construct(PostRepository $postRepository, UserRepository $userRepository, FollowRepository $followRepository, EntityManagerInterface $manager)
     {
         $this->postRepository = $postRepository;
         $this->userRepository = $userRepository;
         $this->followRepository = $followRepository;
-        $this->profilServices = $profilServices;
         $this->manager = $manager;
 
     }
@@ -47,7 +44,7 @@ class ProfilController extends AbstractController
      * @param PostServices $postServices
      * @return Response
      */
-    public function index(Request $request, UserInterface $user, PostServices $postServices, ProfilServices $profilServices)
+    public function index(Request $request, UserInterface $user, PostServices $postServices)
     {
             $id = $request->get('id');
             $form = $postServices->formCreate($request, $user);
@@ -61,19 +58,23 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("profil/add",name="profil_add_follow")
+     * @Route("profil/add",name="profile_add_follow")
+     * @param User $user
+     * @param Request $request
+     * @param ProfilServices $profilServices
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addFollow(UserInterface $user, Request $request)
+    public function addFollow(UserInterface $user, Request $request, ProfilServices $profilServices)
     {
         $follow = new Follow();
         $followId = $request->get('id');
-        $this->profilServices->addFollow($follow, $user, $followId );
+        $profilServices->addFollow($follow, $user, $followId );
 
         return $this->redirectToRoute('profil', array('id' => $followId));
     }
 
     /**
-     * @Route("profil/delete/{$id}",name="profil_del_follow")
+     * @Route("profil/delete/{$id}",name="profile_del_follow")
 
      */
     public function deleteFollow(UserInterface $user, Request $request)

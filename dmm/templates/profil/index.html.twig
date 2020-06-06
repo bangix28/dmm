@@ -10,17 +10,19 @@
                 <h1>{{ user.firstName }} {{ user.lastName }}</h1>
             {% if app.user.id is not same as(user.id) %}
                     {% if follow is empty %}
-                        <a href="{{ path('profil_add_follow', {'id': user.id}) }}">Ajouter !</a>
+                        <a href="{{ path('profile_add_follow', {'id': user.id}) }}">Ajouter !</a>
                         {% else %}
-                        <a href="{{ path('profil_del_follow', {'id': follow.id, 'pId': user.id}) }}">Retirer</a>
+                        <a href="{{ path('profile_del_follow', {'id': follow.id, 'pId': user.id}) }}">Retirer</a>
                     {% endif %}
             {% endif %}
         </div>
     </header>
     <main class="container">
-        <div class="col-10 mx-auto p-3 mt-5 border rounded">
-            {{ include('Profil/_form.html.twig') }}
-        </div>
+        {% if follow is not empty %}
+            <div class="col-10 mx-auto p-3 mt-5 border rounded">
+                {{ include('Profil/_form.html.twig') }}
+            </div>
+        {% endif %}
             {% for post in post %}
         <article class="col-10 mx-auto mt-5 border rounded p-3">
             <div class="row col-6">
@@ -29,7 +31,7 @@
 
             </div>
             <div class="col-10  mx-auto">
-                <p>{{ post.content }}</p>
+                <p>{{ post.content |raw }}</p>
             </div>
             <div class="col-12 row">
                 <div class="col-4">
