@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Follow;
-use App\Entity\Post;
 use App\Entity\User;
 use App\Repository\FollowRepository;
 use App\Repository\PostRepository;
@@ -26,16 +25,13 @@ class ProfilController extends AbstractController
 
     private $followRepository;
 
-    private $profilServices;
-
     private $manager;
 
-    public function __construct(PostRepository $postRepository, UserRepository $userRepository, FollowRepository $followRepository, ProfilServices $profilServices, EntityManagerInterface $manager)
+    public function __construct(PostRepository $postRepository, UserRepository $userRepository, FollowRepository $followRepository, EntityManagerInterface $manager)
     {
         $this->postRepository = $postRepository;
         $this->userRepository = $userRepository;
         $this->followRepository = $followRepository;
-        $this->profilServices = $profilServices;
         $this->manager = $manager;
 
     }
@@ -47,7 +43,7 @@ class ProfilController extends AbstractController
      * @param PostServices $postServices
      * @return Response
      */
-    public function index(Request $request, UserInterface $user, PostServices $postServices, ProfilServices $profilServices)
+    public function index(Request $request, UserInterface $user, PostServices $postServices)
     {
             $id = $request->get('id');
             $form = $postServices->formCreate($request, $user);
@@ -62,12 +58,16 @@ class ProfilController extends AbstractController
 
     /**
      * @Route("profil/add",name="profil_add_follow")
+     * @param User $user
+     * @param Request $request
+     * @param ProfilServices $profilServices
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addFollow(UserInterface $user, Request $request)
+    public function addFollow(User $user, Request $request, ProfilServices $profilServices)
     {
         $follow = new Follow();
         $followId = $request->get('id');
-        $this->profilServices->addFollow($follow, $user, $followId );
+        $profilServices->addFollow($follow, $user, $followId );
 
         return $this->redirectToRoute('profil', array('id' => $followId));
     }
