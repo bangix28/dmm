@@ -15,7 +15,8 @@
                     <div class="row col-6">
                         <img src="{{ asset('build/images/user.png') }}" class="rounded-circle  img-fluid align-items-top" style="max-height: 50px;"  alt="User image">
                         <p class="ml-1">
-                            {{ post.user.firstName }} {{ post.user.lastName }} posté le {{ post.createdAt|date('d/m/y')}} à {{ post.createdAt|date('h:II') }}
+                           <a href="{{ path('profil', {'id': post.user.id}) }}">{{ post.user.firstName }} {{ post.user.lastName }}</a>
+                            posté le {{ post.createdAt|date('d/m/y')}} à {{ post.createdAt|date('h:II') }}
                         </p>
 
                     </div>
