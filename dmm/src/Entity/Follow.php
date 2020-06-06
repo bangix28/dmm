@@ -18,7 +18,7 @@ class Follow
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="follows")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="follows")
      */
     private $follower;
 
