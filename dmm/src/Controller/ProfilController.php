@@ -10,6 +10,7 @@ use App\Repository\UserRepository;
 use App\Services\Post\PostServices;
 use App\Services\Profil\ProfilServices;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,13 +58,13 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("profil/add",name="profil_add_follow")
+     * @Route("profil/add",name="profile_add_follow")
      * @param User $user
      * @param Request $request
      * @param ProfilServices $profilServices
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addFollow(User $user, Request $request, ProfilServices $profilServices)
+    public function addFollow(UserInterface $user, Request $request, ProfilServices $profilServices)
     {
         $follow = new Follow();
         $followId = $request->get('id');
@@ -73,7 +74,7 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("profil/delete/{$id}",name="profil_del_follow")
+     * @Route("profil/delete/{$id}",name="profile_del_follow")
 
      */
     public function deleteFollow(UserInterface $user, Request $request)
